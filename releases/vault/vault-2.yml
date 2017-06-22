@@ -1,0 +1,19 @@
+name: vault
+version: "2"
+commit_hash: "4213282"
+uncommitted_changes: false
+jobs:
+- name: vault
+  version: 18595d85fd68849ea3252b0bd58b6dc4facbf67b
+  fingerprint: 18595d85fd68849ea3252b0bd58b6dc4facbf67b
+  sha1: c604c288bc260873c13349331efec7afecd34d25
+packages:
+- name: vault
+  version: bbd70623d90770ac63ec5d4a1c4c5c988d57c43b
+  fingerprint: bbd70623d90770ac63ec5d4a1c4c5c988d57c43b
+  sha1: 4c08c1d58e528897c340bdd4d7570a63a122e9a3
+  dependencies: []
+license:
+  version: a3e6d245553160dad1d273d363550134abc94578
+  fingerprint: a3e6d245553160dad1d273d363550134abc94578
+  sha1: 0e3de1fb7fbb961c0a929a9d0cead13b770e5862
