@@ -4,10 +4,11 @@ backend "file" {
 
 listener "tcp" {
   address = "<%= p("bind_ip") %>:<%= p("bind_port") %>"
-  <% if_p("tls_cert", "tls_key") do %>
-    tls_cert_file = "/var/vcap/jobs/vault/config/ssl.crt"
-    tls_key_file  = "/var/vcap/jobs/vault/config/ssl.key"
-  <% end.else do %>
-    tls_disable = "false"
-  <% end %>
+
+<% if_p("tls_cert", "tls_key") do %>
+  tls_cert_file = "/var/vcap/jobs/vault/config/ssl.crt"
+  tls_key_file  = "/var/vcap/jobs/vault/config/ssl.key"
+<% end.else do %>
+  tls_disable = 1
+<% end %>
 }
