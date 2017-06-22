@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e -u -x
+
+RUN_DIR=/var/vcap/sys/run/vault
+LOG_DIR=/var/vcap/sys/log/vault
+STORE_DIR=/var/vcap/store/vault
+PACKAGE_DIR=/var/vcap/packages/vault
+PIDFILE=$RUN_DIR/pid
+
+source $PACKAGE_DIR/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "vault"
+
+    mkdir -p $RUN_DIR $LOG_DIR $STORE_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR $STORE_DIR
+
+    setcap cap_ipc_lock=+ep $PACKAGE_DIR/vault
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap $PACKAGE_DIR/vault server \
+      --config /var/vcap/jobs/vault/config/config.hcl \
+      1>>$LOG_DIR/stdout.log \
+      2>>$LOG_DIR/stderr.log
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+
+    ;;
+
+esac
