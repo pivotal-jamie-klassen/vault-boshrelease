@@ -3,9 +3,13 @@ name: vault
 
 templates:
   vault_ctl: bin/vault_ctl
+  vault_init.sh: bin/post-start
   config.hcl.erb: config/config.hcl
+  ca.crt.erb: config/ca.crt
   ssl.key.erb: config/ssl.key
   ssl.crt.erb: config/ssl.crt
+  concourse.crt.erb: config/concourse.crt
+  concourse.key.erb: config/concourse.key
 
 packages:
 - vault
@@ -20,9 +24,10 @@ properties:
       Port for the TCP connection to listen on
     default: 8200
 
-  tls.certificate:
+  tls:
     description: |
-      Content of the PEM-encoded TLS server cert
-  tls.private_key:
+      TLS server certificate
+
+  concourse:
     description: |
-      Content of the PEM-encoded TLS server private key
+      certificate of concourse client
