@@ -3,7 +3,6 @@ name: vault
 
 templates:
   vault_ctl: bin/vault_ctl
-  vault_init.sh: bin/post-start
   config.hcl.erb: config/config.hcl
   ca.crt.erb: config/ca.crt
   ssl.key.erb: config/ssl.key
